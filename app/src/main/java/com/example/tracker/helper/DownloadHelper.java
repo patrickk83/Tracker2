@@ -3,6 +3,7 @@ package com.example.tracker.helper;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.tracker.model.DownloadInterface;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,10 +14,10 @@ import java.net.URL;
 
 public class DownloadHelper extends AsyncTask<String, Boolean, Boolean> {
 
-    private com.example.antennarotorcontrol.interfaces.DownloadInterface downloadInterface;
+    private DownloadInterface downloadInterface;
     private File file;
 
-    public DownloadHelper(com.example.antennarotorcontrol.interfaces.DownloadInterface dInterface, File file) {
+    public DownloadHelper(DownloadInterface dInterface, File file) {
         this.downloadInterface = dInterface;
         this.file = file;
     }

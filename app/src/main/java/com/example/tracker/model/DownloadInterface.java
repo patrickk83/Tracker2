@@ -1,4 +1,4 @@
-package com.example.antennarotorcontrol.interfaces;
+package com.example.tracker.model;
 
 public interface DownloadInterface {
     void onResult();
