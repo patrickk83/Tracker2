@@ -1,0 +1,60 @@
+package com.example.tracker.helper;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class DownloadHelper extends AsyncTask<String, Boolean, Boolean> {
+
+    private com.example.antennarotorcontrol.interfaces.DownloadInterface downloadInterface;
+    private File file;
+
+    public DownloadHelper(com.example.antennarotorcontrol.interfaces.DownloadInterface dInterface, File file) {
+        this.downloadInterface = dInterface;
+        this.file = file;
+    }
+
+    @Override
+    protected Boolean doInBackground(String[] objects) {
+        if (file.delete()) {
+            Log.d("File delete: ", "true");
+        }
+        try {
+            int count;
+            URL url = new URL("https://www.celestrak.com/NORAD/elements/amateur.txt");
+            HttpURLConnection connection = null;
+            connection = (HttpURLConnection) url.openConnection();
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            OutputStream output = new FileOutputStream(file);
+            byte[] data = new byte[1024];
+            while ((count = input.read(data)) != -1) {
+                output.write(data, 0, count);
+            }
+            output.flush();
+            output.close();
+            input.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    protected void onPostExecute(Boolean b) {
+        if (b)
+            downloadInterface.onResult();
+        else
+            Log.d("Download", "fail");
+    }
+
+
+}
