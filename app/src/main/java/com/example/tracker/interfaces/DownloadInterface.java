@@ -1,4 +1,4 @@
-package com.example.tracker.model;
+package com.example.tracker.interfaces;
 
 public interface DownloadInterface {
     void onResult();

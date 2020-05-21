@@ -3,7 +3,7 @@ package com.example.tracker.helper;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.tracker.model.DownloadInterface;
+import com.example.tracker.interfaces.DownloadInterface;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
