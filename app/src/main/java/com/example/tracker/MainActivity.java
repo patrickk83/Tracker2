@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tracker.helper.DownloadHelper;
+import com.example.tracker.interfaces.DownloadInterface;
 import com.example.tracker.model.Model;
 import com.example.tracker.model.Models;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -31,13 +32,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 
 /***************************************************************************************************
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if (checkFirstTime) {
             Log.i(TAG, "Datei wird neu geladen");
             final File file = new File(getExternalFilesDir(null), "amateur.txt");
-            DownloadHelper downloadHelper = new DownloadHelper(new com.example.antennarotorcontrol.interfaces.DownloadInterface() {
+            DownloadHelper downloadHelper = new DownloadHelper(new DownloadInterface() {
                 @Override
                 public void onResult() {
                     Log.i(TAG, "Datei fertig geladen und Daten werden gelesen");
